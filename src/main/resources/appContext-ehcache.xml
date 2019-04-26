@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"    default-autowire="byName" default-lazy-init="false">
+
+	<description>EhCache配置文件</description>
+
+	<bean id="ehcacheManager" class="com.lec.framework.cache.CacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+		<property name="diskStoreLocation" value="${cloud.root}/WEB-INF/cache"/>
+	</bean>
+	
+	<bean id="ehcacheImpl" class="com.lec.framework.cache.EhcacheImpl"></bean>
+	
+	<!-- 按钮菜单权限缓存 -->
+	<bean id="authorityButtonCache" class="com.lec.common.user.cache.AuthorityButtonCache"/>
+	<bean id="authorityMenuCache" class="com.lec.common.user.cache.AuthorityMenuCache"/>
+	<!-- 角色缓存 -->
+	<bean id="roleCache" class="com.lec.common.user.cache.RoleCache"/>
+	<!-- 部门缓存 -->
+	<bean id="departmentCache" class="com.lec.common.user.cache.DepartmentCache"/>
+	<!-- 用户缓存 -->
+	<bean id="userCache" class="com.lec.common.user.cache.UserCache"/>
+    <bean id="menuCache" class="com.lec.common.system.cache.MenuCache"/>
+    <!-- 数据字典 -->
+	<bean id="dicCache" class="com.lec.common.dictionary.cache.DicCache"/>
+    
+	<bean name="cacheFactory" class="com.lec.framework.cache.CacheFactory">
+		<property name="items">
+			<list>
+				<ref local="authorityButtonCache"/>
+				<ref local="authorityMenuCache"/>
+				<ref local="roleCache"/>
+				<ref local="departmentCache"/>
+				<ref local="userCache"/>
+                <ref local="menuCache"/>
+                <ref local="dicCache"/>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

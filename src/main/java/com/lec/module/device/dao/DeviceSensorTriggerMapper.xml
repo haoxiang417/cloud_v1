@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.module.device.dao.DeviceSensorTriggerMapper" >
+  <resultMap id="BaseResultMap" type="com.lec.module.device.vo.DeviceSensorTrigger" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SENSOR_ID" property="sensorId" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="TRIGGER_VAL1" property="triggerVal1" jdbcType="VARCHAR" />
+    <result column="TRIGGER_VAL2" property="triggerVal2" jdbcType="VARCHAR" />
+    <result column="IS_FORWARD" property="isForward" jdbcType="VARCHAR" />
+    <result column="FORWARD_SENSOR_ID" property="forwardSensorId" jdbcType="VARCHAR" />
+    <result column="DATA_FORMAT" property="dataFormat" jdbcType="VARCHAR" />
+    <result column="FORWARD_DATA" property="forwardData" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    ID, SENSOR_ID, TYPE, TRIGGER_VAL1, TRIGGER_VAL2, IS_FORWARD, FORWARD_SENSOR_ID, DATA_FORMAT, 
+    FORWARD_DATA, STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lec.module.device.vo.DeviceSensorTriggerSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_DEVICE_SENSOR_TRIGGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEVICE_SENSOR_TRIGGER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    delete from T_DEVICE_SENSOR_TRIGGER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lec.module.device.vo.DeviceSensorTriggerSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    delete from T_DEVICE_SENSOR_TRIGGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lec.module.device.vo.DeviceSensorTrigger" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    insert into T_DEVICE_SENSOR_TRIGGER (SENSOR_ID, TYPE, TRIGGER_VAL1, 
+      TRIGGER_VAL2, IS_FORWARD, FORWARD_SENSOR_ID, 
+      DATA_FORMAT, FORWARD_DATA, STATUS)
+    values (#{sensorId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{triggerVal1,jdbcType=VARCHAR}, 
+      #{triggerVal2,jdbcType=VARCHAR}, #{isForward,jdbcType=VARCHAR}, #{forwardSensorId,jdbcType=VARCHAR}, 
+      #{dataFormat,jdbcType=VARCHAR}, #{forwardData,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lec.module.device.vo.DeviceSensorTrigger" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    insert into T_DEVICE_SENSOR_TRIGGER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorId)" >
+        SENSOR_ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(type)" >
+        TYPE,
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal1)" >
+        TRIGGER_VAL1,
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal2)" >
+        TRIGGER_VAL2,
+      </if>
+      <if test="@Ognl@isNotEmpty(isForward)" >
+        IS_FORWARD,
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardSensorId)" >
+        FORWARD_SENSOR_ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(dataFormat)" >
+        DATA_FORMAT,
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardData)" >
+        FORWARD_DATA,
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorId)" >
+        #{sensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(type)" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal1)" >
+        #{triggerVal1,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal2)" >
+        #{triggerVal2,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(isForward)" >
+        #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardSensorId)" >
+        #{forwardSensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(dataFormat)" >
+        #{dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardData)" >
+        #{forwardData,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lec.module.device.vo.DeviceSensorTriggerSearch" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    select count(*) from T_DEVICE_SENSOR_TRIGGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_TRIGGER
+    <set >
+      <if test="@Ognl@isNotEmpty(record.id)" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.sensorId)" >
+        SENSOR_ID = #{record.sensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.type)" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.triggerVal1)" >
+        TRIGGER_VAL1 = #{record.triggerVal1,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.triggerVal2)" >
+        TRIGGER_VAL2 = #{record.triggerVal2,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.isForward)" >
+        IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.forwardSensorId)" >
+        FORWARD_SENSOR_ID = #{record.forwardSensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.dataFormat)" >
+        DATA_FORMAT = #{record.dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.forwardData)" >
+        FORWARD_DATA = #{record.forwardData,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.status)" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_TRIGGER
+    set ID = #{record.id,jdbcType=VARCHAR},
+      SENSOR_ID = #{record.sensorId,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      TRIGGER_VAL1 = #{record.triggerVal1,jdbcType=VARCHAR},
+      TRIGGER_VAL2 = #{record.triggerVal2,jdbcType=VARCHAR},
+      IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      FORWARD_SENSOR_ID = #{record.forwardSensorId,jdbcType=VARCHAR},
+      DATA_FORMAT = #{record.dataFormat,jdbcType=VARCHAR},
+      FORWARD_DATA = #{record.forwardData,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lec.module.device.vo.DeviceSensorTrigger" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_TRIGGER
+    <set >
+      <if test="@Ognl@isNotEmpty(sensorId)" >
+        SENSOR_ID = #{sensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(type)" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal1)" >
+        TRIGGER_VAL1 = #{triggerVal1,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal2)" >
+        TRIGGER_VAL2 = #{triggerVal2,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(isForward)" >
+        IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardSensorId)" >
+        FORWARD_SENSOR_ID = #{forwardSensorId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(dataFormat)" >
+        DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardData)" >
+        FORWARD_DATA = #{forwardData,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lec.module.device.vo.DeviceSensorTrigger" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_TRIGGER
+    set SENSOR_ID = #{sensorId,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      TRIGGER_VAL1 = #{triggerVal1,jdbcType=VARCHAR},
+      TRIGGER_VAL2 = #{triggerVal2,jdbcType=VARCHAR},
+      IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      FORWARD_SENSOR_ID = #{forwardSensorId,jdbcType=VARCHAR},
+      DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR},
+      FORWARD_DATA = #{forwardData,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getListByCondition" resultMap="BaseResultMap" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+     from T_DEVICE_SENSOR_TRIGGER
+    <where >
+      <if test="@Ognl@isNotEmpty(id)" >
+         and ID = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorId)" >
+         and SENSOR_ID = #{sensorId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(type)" >
+         and TYPE = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal1)" >
+         and TRIGGER_VAL1 = #{triggerVal1,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal2)" >
+         and TRIGGER_VAL2 = #{triggerVal2,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(isForward)" >
+         and IS_FORWARD = #{isForward,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardSensorId)" >
+         and FORWARD_SENSOR_ID = #{forwardSensorId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(dataFormat)" >
+         and DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardData)" >
+         and FORWARD_DATA = #{forwardData,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+         and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+    </where>
+    <if test="@Ognl@isNotEmpty(sortColumn)" >
+       order by ${sortColumn} 
+    </if>
+  </select>
+  <select id="countList" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Wed Jan 10 09:45:32 CST 2018.
+    -->
+    select count(*) from T_DEVICE_SENSOR_TRIGGER
+    <where >
+      <if test="@Ognl@isNotEmpty(id)" >
+         and ID = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorId)" >
+         and SENSOR_ID = #{sensorId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(type)" >
+         and TYPE = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal1)" >
+         and TRIGGER_VAL1 = #{triggerVal1,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(triggerVal2)" >
+         and TRIGGER_VAL2 = #{triggerVal2,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(isForward)" >
+         and IS_FORWARD = #{isForward,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardSensorId)" >
+         and FORWARD_SENSOR_ID = #{forwardSensorId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(dataFormat)" >
+         and DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(forwardData)" >
+         and FORWARD_DATA = #{forwardData,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+         and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

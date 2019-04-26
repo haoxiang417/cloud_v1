@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 说明： group节点表示对自定类型进行分组 
+	   gencode用以对字典的编码进行自动生成策略,目前支持的策略有:auto和gb两种。
+		auto表示从1开始自增 
+		gb表示拥护手动输入。 -->
+<dics>
+	<group id="base">
+		<dic key="404" name="未知类型" gencode=""/>
+		<dic key="AGREEMENT" name="链接协议" gencode="auto"/>
+	</group>
+</dics>

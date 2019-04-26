@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.common.deptment.dao.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.lec.common.deptment.vo.Department">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="PARENTID" property="parentid" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="LEVELS" property="levels" jdbcType="INTEGER"/>
+        <result column="CODE" property="code" jdbcType="VARCHAR"/>
+        <result column="PRINCIPAL" property="principal" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="PRINCIPALNAME" property="principalname" jdbcType="VARCHAR"/>
+        <result column="IS_CORPOR" property="isCorpor" jdbcType="VARCHAR"/>
+        <result column="CORPOR_ID" property="corporId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        ID, PARENTID, NAME, MEMO, STATUS, LEVELS, CODE, PRINCIPAL, MOBILE, PRINCIPALNAME,
+        IS_CORPOR, CORPOR_ID
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.lec.common.deptment.vo.DepartmentSearch">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_org
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_org
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        delete from sys_org
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.lec.common.deptment.vo.DepartmentSearch">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        delete from sys_org
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.lec.common.deptment.vo.Department" useGeneratedKeys="true"
+            keyProperty="id">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        insert into sys_org (PARENTID, NAME, MEMO,
+        STATUS, LEVELS, CODE,
+        PRINCIPAL, MOBILE, PRINCIPALNAME,
+        IS_CORPOR, CORPOR_ID)
+        values (#{parentid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR}, #{levels,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+        #{principal,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{principalname,jdbcType=VARCHAR},
+        #{isCorpor,jdbcType=VARCHAR}, #{corporId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lec.common.deptment.vo.Department" useGeneratedKeys="true"
+            keyProperty="id">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        insert into sys_org
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="@Ognl@isNotEmpty(id)">
+                ID,
+            </if>
+            <if test="@Ognl@isNotEmpty(parentid)">
+                PARENTID,
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                NAME,
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                MEMO,
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                STATUS,
+            </if>
+            <if test="@Ognl@isNotEmpty(levels)">
+                LEVELS,
+            </if>
+            <if test="@Ognl@isNotEmpty(code)">
+                CODE,
+            </if>
+            <if test="@Ognl@isNotEmpty(principal)">
+                PRINCIPAL,
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                MOBILE,
+            </if>
+            <if test="@Ognl@isNotEmpty(principalname)">
+                PRINCIPALNAME,
+            </if>
+            <if test="@Ognl@isNotEmpty(isCorpor)">
+                IS_CORPOR,
+            </if>
+            <if test="@Ognl@isNotEmpty(corporId)">
+                CORPOR_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="@Ognl@isNotEmpty(id)">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(parentid)">
+                #{parentid,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(levels)">
+                #{levels,jdbcType=INTEGER},
+            </if>
+            <if test="@Ognl@isNotEmpty(code)">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(principal)">
+                #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(principalname)">
+                #{principalname,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(isCorpor)">
+                #{isCorpor,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(corporId)">
+                #{corporId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.lec.common.deptment.vo.DepartmentSearch"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        select count(*) from sys_org
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        update sys_org
+        <set>
+            <if test="@Ognl@isNotEmpty(record.id)">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.parentid)">
+                PARENTID = #{record.parentid,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.name)">
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.memo)">
+                MEMO = #{record.memo,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.status)">
+                STATUS = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.levels)">
+                LEVELS = #{record.levels,jdbcType=INTEGER},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.code)">
+                CODE = #{record.code,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.principal)">
+                PRINCIPAL = #{record.principal,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.mobile)">
+                MOBILE = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.principalname)">
+                PRINCIPALNAME = #{record.principalname,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.isCorpor)">
+                IS_CORPOR = #{record.isCorpor,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(record.corporId)">
+                CORPOR_ID = #{record.corporId,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        update sys_org
+        set ID = #{record.id,jdbcType=VARCHAR},
+        PARENTID = #{record.parentid,jdbcType=VARCHAR},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+        STATUS = #{record.status,jdbcType=VARCHAR},
+        LEVELS = #{record.levels,jdbcType=INTEGER},
+        CODE = #{record.code,jdbcType=VARCHAR},
+        PRINCIPAL = #{record.principal,jdbcType=VARCHAR},
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        PRINCIPALNAME = #{record.principalname,jdbcType=VARCHAR},
+        IS_CORPOR = #{record.isCorpor,jdbcType=VARCHAR},
+        CORPOR_ID = #{record.corporId,jdbcType=BIGINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lec.common.deptment.vo.Department">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        update sys_org
+        <set>
+            <if test="@Ognl@isNotEmpty(parentid)">
+                PARENTID = #{parentid,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(levels)">
+                LEVELS = #{levels,jdbcType=INTEGER},
+            </if>
+            <if test="@Ognl@isNotEmpty(code)">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(principal)">
+                PRINCIPAL = #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(principalname)">
+                PRINCIPALNAME = #{principalname,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(isCorpor)">
+                IS_CORPOR = #{isCorpor,jdbcType=VARCHAR},
+            </if>
+            <if test="@Ognl@isNotEmpty(corporId)">
+                CORPOR_ID = #{corporId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lec.common.deptment.vo.Department">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        update sys_org
+        set PARENTID = #{parentid,jdbcType=VARCHAR},
+        NAME = #{name,jdbcType=VARCHAR},
+        MEMO = #{memo,jdbcType=VARCHAR},
+        STATUS = #{status,jdbcType=VARCHAR},
+        LEVELS = #{levels,jdbcType=INTEGER},
+        CODE = #{code,jdbcType=VARCHAR},
+        PRINCIPAL = #{principal,jdbcType=VARCHAR},
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+        PRINCIPALNAME = #{principalname,jdbcType=VARCHAR},
+        IS_CORPOR = #{isCorpor,jdbcType=VARCHAR},
+        CORPOR_ID = #{corporId,jdbcType=BIGINT}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getListByCondition" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_org
+        <where>
+            <if test="@Ognl@isNotEmpty(id)">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+
+            <if test="@Ognl@isNotEmpty(orgs)">
+                and ${orgs}
+            </if>
+            <if test="@Ognl@isNotEmpty(parentid)">
+                and PARENTID = #{parentid,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                and NAME = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                and MEMO = #{memo,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                and STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(levels)">
+                and LEVELS = #{levels,jdbcType=INTEGER}
+            </if>
+            <if test="@Ognl@isNotEmpty(code)">
+                and CODE = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(principal)">
+                and PRINCIPAL = #{principal,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                and MOBILE = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(principalname)">
+                and PRINCIPALNAME = #{principalname,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(isCorpor)">
+                and IS_CORPOR = #{isCorpor,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(corporId)">
+                and CORPOR_ID = #{corporId,jdbcType=BIGINT}
+            </if>
+        </where>
+        <if test="@Ognl@isNotEmpty(sortColumn)">
+            order by ${sortColumn}
+        </if>
+    </select>
+    <select id="countList" resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element was generated on Wed Nov 12 20:29:06 CST 2014.
+        -->
+        select count(*) from sys_org
+        <where>
+            <if test="@Ognl@isNotEmpty(id)">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+
+            <if test="@Ognl@isNotEmpty(orgs)">
+                and ${orgs}
+            </if>
+            <if test="@Ognl@isNotEmpty(parentid)">
+                and PARENTID = #{parentid,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                and NAME = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                and MEMO = #{memo,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                and STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(levels)">
+                and LEVELS = #{levels,jdbcType=INTEGER}
+            </if>
+            <if test="@Ognl@isNotEmpty(code)">
+                and CODE = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(principal)">
+                and PRINCIPAL = #{principal,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                and MOBILE = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(principalname)">
+                and PRINCIPALNAME = #{principalname,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(isCorpor)">
+                and IS_CORPOR = #{isCorpor,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(corporId)">
+                and CORPOR_ID = #{corporId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    <select id="getCountByLevel" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from SYS_ORG where LEVELS = #{levels}
+    </select>
+
+    <select id="getLeafNodeById" resultType="com.lec.common.deptment.vo.Department" parameterType="java.lang.String">
+        select ID, PARENTID, NAME ,CODE, PRINCIPALNAME,MEMO,MOBILE,levels from SYS_ORG where PARENTID=#{parentid} and status='0' order by CODE
+    </select>
+
+    <select id="hasChild" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(id) from SYS_ORG where PARENTID=#{parentid} and status='0'
+    </select>
+</mapper>

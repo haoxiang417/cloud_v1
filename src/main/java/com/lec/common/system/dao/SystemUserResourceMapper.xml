@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.common.system.dao.SystemUserResourceMapper" >
+  
+  <insert id="save" parameterType="com.lec.common.system.vo.SystemResourceHelp" >
+    INSERT INTO SYS_USER_RESOURCE (USER_ID, RESOURCE_ID, SORT_NUM)
+    VALUES (#{userId,jdbcType=VARCHAR}, #{resourceId,jdbcType=VARCHAR}, #{sortNum,jdbcType=INTEGER})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    DELETE SYS_USER_RESOURCE
+    WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="getByUserId" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT T.RESOURCE_ID 
+    FROM SYS_USER_RESOURCE T
+    WHERE T.USER_ID = #{userId,jdbcType=VARCHAR}
+    AND EXISTS(SELECT 1 FROM SYS_ROLE_RESOURCES RR WHERE T.RESOURCE_ID = RR.RESOURCE_ID 
+	AND EXISTS(SELECT 1 FROM SYS_USER_ROLE UR WHERE UR.ROLEID = RR.ROLE_ID AND UR.USERID = #{userId,jdbcType=VARCHAR}))
+    ORDER BY T.SORT_NUM
+  </select>
+  
+</mapper>

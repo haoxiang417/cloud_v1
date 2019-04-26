@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.common.user.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.lec.common.user.vo.User">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="PWD" property="pwd" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DISABLED" property="disabled" jdbcType="DECIMAL"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="DEPTID" property="deptid" jdbcType="VARCHAR"/>
+        <result column="MEMO" property="memo" jdbcType="VARCHAR"/>
+        <result column="SKIN" property="skin" jdbcType="VARCHAR"/>
+        <result column="CREATEBY" property="createBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, ACCOUNT, PWD, NAME, DISABLED, MOBILE, DEPTID, MEMO,SKIN,CREATEBY
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lec.common.user.vo.UserSearch">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from SYS_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause} desc
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from SYS_USER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.lec.common.user.vo.UserSearch">
+        delete from SYS_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.lec.common.user.vo.User">
+    insert into SYS_USER (id,ACCOUNT, PWD, NAME, 
+      DISABLED, MOBILE, DEPTID, 
+      MEMO, SKIN)
+    values (#{id,jdbcType=VARCHAR},#{account,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{disabled,jdbcType=DECIMAL}, #{mobile,jdbcType=VARCHAR}, #{deptid,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{skin,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lec.common.user.vo.User">
+        insert into SYS_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="account != null">
+                ACCOUNT,
+            </if>
+            <if test="pwd != null">
+                PWD,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="disabled != null">
+                DISABLED,
+            </if>
+            <if test="mobile != null">
+                MOBILE,
+            </if>
+            <if test="deptid != null">
+                DEPTID,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="createBy != null">
+                createBy,
+            </if>
+            <if test="skin != null">
+                skin,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="disabled != null">
+                #{disabled,jdbcType=DECIMAL},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                #{deptid,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="skin != null">
+                #{skin,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.lec.common.user.vo.UserSearch"
+            resultType="java.lang.Integer">
+        select count(*) from SYS_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update SYS_USER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.account != null">
+                ACCOUNT = #{record.account,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pwd != null">
+                PWD = #{record.pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.disabled != null">
+                DISABLED = #{record.disabled,jdbcType=DECIMAL},
+            </if>
+            <if test="record.mobile != null">
+                MOBILE = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deptid != null">
+                DEPTID = #{record.deptid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memo != null">
+                MEMO = #{record.memo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.skin != null">
+                SKIN = #{record.skin,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update SYS_USER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+        PWD = #{record.pwd,jdbcType=VARCHAR},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        DISABLED = #{record.disabled,jdbcType=DECIMAL},
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        DEPTID = #{record.deptid,jdbcType=VARCHAR},
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+        SKIN = #{record.skin,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lec.common.user.vo.User">
+        update SYS_USER
+        <set>
+            <if test="account != null">
+                ACCOUNT = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                PWD = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="disabled != null">
+                DISABLED = #{disabled,jdbcType=DECIMAL},
+            </if>
+            <if test="mobile != null">
+                MOBILE = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                DEPTID = #{deptid,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="skin != null">
+                SKIN = #{skin,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lec.common.user.vo.User">
+    update SYS_USER
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DISABLED = #{disabled,jdbcType=DECIMAL},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      DEPTID = #{deptid,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      SKIN = #{skin,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="getRoleListByUser" parameterType="java.lang.String" resultType="java.lang.String">
+  	SELECT code
+  		FROM SYS_ROLE r
+ 	WHERE R.ID IN (SELECT roleid FROM sys_user_role sr WHERE sr.userid = #{userid}) 
+  </select>
+
+    <select id="getRoleNameListByUser" parameterType="java.lang.String" resultType="java.lang.String">
+  	SELECT name
+  		FROM SYS_ROLE r
+ 	WHERE R.ID IN (SELECT roleid FROM sys_user_role sr WHERE sr.userid = #{userid}) 
+  </select>
+
+    <sql id="where_columns">
+        <where>
+            <if test="@Ognl@isNotEmpty(orgs)">
+                and deptid in(${orgs})
+            </if>
+            <if test="@Ognl@isNotEmpty(id)">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(account)">
+                and ACCOUNT = #{account,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(pwd)">
+                and PWD = #{pwd,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(name)">
+                and NAME = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(disabled)">
+                and DISABLED = #{disabled,jdbcType=DECIMAL}
+            </if>
+            <if test="@Ognl@isNotEmpty(mobile)">
+                and MOBILE = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(deptid)">
+                and DEPTID = #{deptid,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(memo)">
+                and MEMO = #{memo,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(iprule)">
+                and IPRULE = #{iprule,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(createBy)">
+                and CREATEBY = #{createBy,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="getListByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SYS_USER
+        <include refid="where_columns"/>
+        <if test="@Ognl@isNotEmpty(sortColumn)">
+            order by ${sortColumn}
+        </if>
+    </select>
+    <select id="countList" resultType="java.lang.Integer">
+        select count(*) from SYS_USER
+        <include refid="where_columns"/>
+    </select>
+</mapper>

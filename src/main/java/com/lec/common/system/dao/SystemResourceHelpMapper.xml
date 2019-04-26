@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.common.system.dao.SystemResourceHelpMapper" >
+
+  <resultMap id="BaseResultMap" type="com.lec.common.system.vo.SystemResourceHelp" >
+    <id column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+    <result column="HELP_CONTENT" property="helpContent" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ChildMenu" type="com.lec.common.system.vo.SystemResource" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="save" parameterType="com.lec.common.system.vo.SystemResourceHelp" >
+    INSERT INTO SYS_RESOURCE_HELP (MENU_ID, HELP_CONTENT)
+    VALUES (#{menuId,jdbcType=VARCHAR}, #{helpContent,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.lec.common.system.vo.SystemResourceHelp" >
+    UPDATE SYS_RESOURCE_HELP
+    SET HELP_CONTENT = #{helpContent,jdbcType=VARCHAR}
+    WHERE MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT MENU_ID, HELP_CONTENT FROM SYS_RESOURCE_HELP WHERE MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getChileMenu" resultMap="ChildMenu" >
+	SELECT T.ID
+	  , CASE WHEN `get_parent_menu`(T.ID) IS NULL THEN T.NAME ELSE CONCAT(`get_parent_menu`(T.ID), '--', T.NAME) END AS NAME 
+    FROM SYS_RESOURCE T
+	 WHERE FIND_IN_SET(T.ID, `get_child_menuid`('${menuId}'))
+	  AND T.ID != '${menuId}' AND T.CONTENT IS NOT NULL AND T.CONTENT != '' AND T.TYPE = '0'
+	  AND EXISTS(SELECT 1 FROM SYS_ROLE_RESOURCES RR WHERE T.ID = RR.RESOURCE_ID 
+	  AND EXISTS(SELECT 1 FROM SYS_USER_ROLE UR WHERE UR.ROLEID = RR.ROLE_ID AND UR.USERID = '${userId}'))
+	ORDER BY T.PARENTID, T.SORT_ORDER
+  </select>
+</mapper>

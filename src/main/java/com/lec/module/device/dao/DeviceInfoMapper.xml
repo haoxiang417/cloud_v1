@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.module.device.dao.DeviceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lec.module.device.vo.DeviceInfo" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="AGREEMENT" property="agreement" jdbcType="VARCHAR" />
+    <result column="CYCLE_TYPE" property="cycleType" jdbcType="VARCHAR" />
+    <result column="CYCLE" property="cycle" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="DECIMAL" />
+    <result column="LATITUDE" property="latitude" jdbcType="DECIMAL" />
+    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="PORT" property="port" jdbcType="DECIMAL" />
+    <result column="SERIAL_NO" property="serialNo" jdbcType="VARCHAR" />
+    <result column="VIDEO_URL" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="IS_OPEN" property="isOpen" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_ID" property="createId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_ID" property="updateId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    ID, CODE, NAME, AGREEMENT, CYCLE_TYPE, CYCLE, LONGITUDE, LATITUDE, ICON, IP, PORT, 
+    SERIAL_NO, VIDEO_URL, IS_OPEN, STATUS, CREATE_ID, CREATE_TIME, UPDATE_ID, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lec.module.device.vo.DeviceInfoSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_DEVICE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEVICE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    delete from T_DEVICE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lec.module.device.vo.DeviceInfoSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    delete from T_DEVICE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lec.module.device.vo.DeviceInfo" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    insert into T_DEVICE_INFO (CODE, NAME, AGREEMENT, 
+      CYCLE_TYPE, CYCLE, LONGITUDE, 
+      LATITUDE, ICON, IP, 
+      PORT, SERIAL_NO, VIDEO_URL, IS_OPEN, 
+      STATUS, CREATE_ID, CREATE_TIME, 
+      UPDATE_ID, UPDATE_TIME)
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{agreement,jdbcType=VARCHAR}, 
+      #{cycleType,jdbcType=VARCHAR}, #{cycle,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{icon,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{port,jdbcType=DECIMAL}, #{serialNo,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, #{isOpen,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lec.module.device.vo.DeviceInfo" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    insert into T_DEVICE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(code)" >
+        CODE,
+      </if>
+      <if test="@Ognl@isNotEmpty(name)" >
+        NAME,
+      </if>
+      <if test="@Ognl@isNotEmpty(agreement)" >
+        AGREEMENT,
+      </if>
+      <if test="@Ognl@isNotEmpty(cycleType)" >
+        CYCLE_TYPE,
+      </if>
+      <if test="@Ognl@isNotEmpty(cycle)" >
+        CYCLE,
+      </if>
+      <if test="@Ognl@isNotEmpty(longitude)" >
+        LONGITUDE,
+      </if>
+      <if test="@Ognl@isNotEmpty(latitude)" >
+        LATITUDE,
+      </if>
+      <if test="@Ognl@isNotEmpty(icon)" >
+        ICON,
+      </if>
+      <if test="@Ognl@isNotEmpty(ip)" >
+        IP,
+      </if>
+      <if test="@Ognl@isNotEmpty(port)" >
+        PORT,
+      </if>
+      <if test="@Ognl@isNotEmpty(serialNo)" >
+        SERIAL_NO,
+      </if>
+      <if test="@Ognl@isNotEmpty(videoUrl)" >
+        VIDEO_URL,
+      </if>
+      <if test="@Ognl@isNotEmpty(isOpen)" >
+        IS_OPEN,
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+        STATUS,
+      </if>
+      <if test="@Ognl@isNotEmpty(createId)" >
+        CREATE_ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(createTime)" >
+        CREATE_TIME,
+      </if>
+      <if test="@Ognl@isNotEmpty(updateId)" >
+        UPDATE_ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(updateTime)" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(code)" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(name)" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(agreement)" >
+        #{agreement,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(cycleType)" >
+        #{cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(cycle)" >
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(longitude)" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(latitude)" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(icon)" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(ip)" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(port)" >
+        #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(serialNo)" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(videoUrl)" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(isOpen)" >
+        #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(createId)" >
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(createTime)" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="@Ognl@isNotEmpty(updateId)" >
+        #{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(updateTime)" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lec.module.device.vo.DeviceInfoSearch" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    select count(*) from T_DEVICE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    update T_DEVICE_INFO
+    <set >
+      <if test="@Ognl@isNotEmpty(record.id)" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.code)" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.name)" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.agreement)" >
+        AGREEMENT = #{record.agreement,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.cycleType)" >
+        CYCLE_TYPE = #{record.cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.cycle)" >
+        CYCLE = #{record.cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.longitude)" >
+        LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.latitude)" >
+        LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.icon)" >
+        ICON = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.ip)" >
+        IP = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.port)" >
+        PORT = #{record.port,jdbcType=DECIMAL},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.serialNo)" >
+        SERIAL_NO = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.videoUrl)" >
+        VIDEO_URL = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.isOpen)" >
+        IS_OPEN = #{record.isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.status)" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.createId)" >
+        CREATE_ID = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.createTime)" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.updateId)" >
+        UPDATE_ID = #{record.updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.updateTime)" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    update T_DEVICE_INFO
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      AGREEMENT = #{record.agreement,jdbcType=VARCHAR},
+      CYCLE_TYPE = #{record.cycleType,jdbcType=VARCHAR},
+      CYCLE = #{record.cycle,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      ICON = #{record.icon,jdbcType=VARCHAR},
+      IP = #{record.ip,jdbcType=VARCHAR},
+      PORT = #{record.port,jdbcType=DECIMAL},
+      SERIAL_NO = #{record.serialNo,jdbcType=VARCHAR},
+      VIDEO_URL = #{record.videoUrl,jdbcType=VARCHAR},
+      IS_OPEN = #{record.isOpen,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_ID = #{record.createId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{record.updateId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lec.module.device.vo.DeviceInfo" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    update T_DEVICE_INFO
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement != null" >
+        AGREEMENT = #{agreement,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleType != null" >
+        CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        CYCLE = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null" >
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        PORT = #{port,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNo != null" >
+        SERIAL_NO = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        VIDEO_URL = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null" >
+        IS_OPEN = #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        UPDATE_ID = #{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lec.module.device.vo.DeviceInfo" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Tue Mar 06 10:33:12 CST 2018.
+    -->
+    update T_DEVICE_INFO
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      AGREEMENT = #{agreement,jdbcType=VARCHAR},
+      CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR},
+      CYCLE = #{cycle,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      LATITUDE = #{latitude,jdbcType=DECIMAL},
+      ICON = #{icon,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=DECIMAL},
+      SERIAL_NO = #{serialNo,jdbcType=VARCHAR},
+      VIDEO_URL = #{videoUrl,jdbcType=VARCHAR},
+      IS_OPEN = #{isOpen,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_ID = #{createId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_ID = #{updateId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getListByCondition" resultMap="BaseResultMap" >
+    SELECT 
+    <include refid="Base_Column_List" />
+     FROM T_DEVICE_INFO
+    <include refid="Base_Where"/>
+    <if test="@Ognl@isNotEmpty(sortColumn)" >
+       ORDER BY ${sortColumn} 
+    </if>
+  </select>
+  <sql id="Base_Where">
+  	<where >
+      <if test="@Ognl@isNotEmpty(id)" >
+         and ID = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(code)" >
+         and CODE LIKE '%${code}%'
+      </if>
+      <if test="@Ognl@isNotEmpty(name)" >
+         and NAME LIKE '%${name}%'
+      </if>
+      <if test="@Ognl@isNotEmpty(agreement)" >
+         and AGREEMENT = #{agreement,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(cycleType)" >
+         and CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(cycle)" >
+         and CYCLE = #{cycle,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(longitude)" >
+         and LONGITUDE = #{longitude,jdbcType=DECIMAL}
+      </if>
+      <if test="@Ognl@isNotEmpty(latitude)" >
+         and LATITUDE = #{latitude,jdbcType=DECIMAL}
+      </if>
+      <if test="@Ognl@isNotEmpty(icon)" >
+         and ICON = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(ip)" >
+         and IP = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(port)" >
+         and PORT = #{port,jdbcType=DECIMAL}
+      </if>
+      <if test="@Ognl@isNotEmpty(serialNo)" >
+         and SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(videoUrl)" >
+         and VIDEO_URL = #{videoUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(isOpen)" >
+         and IS_OPEN = #{isOpen,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(status)" >
+         and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(createId)" >
+         and CREATE_ID = #{createId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(createTime)" >
+         and CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="@Ognl@isNotEmpty(updateId)" >
+         and UPDATE_ID = #{updateId,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(updateTime)" >
+         and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="countList" resultType="java.lang.Integer" >
+    SELECT COUNT(ID) FROM T_DEVICE_INFO
+    <include refid="Base_Where"/>
+  </select>
+  
+  <delete id="destroyById" parameterType="java.lang.String" statementType="CALLABLE">
+  	{CALL DESTROY_INFO(#{id,jdbcType=VARCHAR,mode=IN})}
+  </delete>
+</mapper>

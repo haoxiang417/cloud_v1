@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lec.module.device.dao.DeviceSensorDataMapper" >
+  <resultMap id="BaseResultMap" type="com.lec.module.device.vo.DeviceSensorData" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DEVICE_CODE" property="deviceCode" jdbcType="VARCHAR" />
+    <result column="DATA_TIME" property="dataTime" jdbcType="TIMESTAMP" />
+    <result column="DATA" property="data" jdbcType="VARCHAR" />
+    <result column="SENSOR_CODE" property="sensorCode" jdbcType="VARCHAR" />
+    <result column="SEND_TYPE" property="sendType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    ID, DEVICE_CODE, DATA_TIME, DATA, SENSOR_CODE, SEND_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lec.module.device.vo.DeviceSensorDataSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_DEVICE_SENSOR_DATA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEVICE_SENSOR_DATA
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    delete from T_DEVICE_SENSOR_DATA
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lec.module.device.vo.DeviceSensorDataSearch" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    delete from T_DEVICE_SENSOR_DATA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lec.module.device.vo.DeviceSensorData" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    insert into T_DEVICE_SENSOR_DATA (DEVICE_CODE, DATA_TIME, DATA, 
+      SENSOR_CODE, SEND_TYPE)
+    values (#{deviceCode,jdbcType=VARCHAR}, #{dataTime,jdbcType=TIMESTAMP}, #{data,jdbcType=VARCHAR}, 
+      #{sensorCode,jdbcType=VARCHAR}, #{sendType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lec.module.device.vo.DeviceSensorData" useGeneratedKeys="true" keyProperty="id" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    insert into T_DEVICE_SENSOR_DATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        ID,
+      </if>
+      <if test="@Ognl@isNotEmpty(deviceCode)" >
+        DEVICE_CODE,
+      </if>
+      <if test="@Ognl@isNotEmpty(dataTime)" >
+        DATA_TIME,
+      </if>
+      <if test="@Ognl@isNotEmpty(data)" >
+        DATA,
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorCode)" >
+        SENSOR_CODE,
+      </if>
+      <if test="@Ognl@isNotEmpty(sendType)" >
+        SEND_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="@Ognl@isNotEmpty(id)" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(deviceCode)" >
+        #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(dataTime)" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="@Ognl@isNotEmpty(data)" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorCode)" >
+        #{sensorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(sendType)" >
+        #{sendType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lec.module.device.vo.DeviceSensorDataSearch" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    select count(*) from T_DEVICE_SENSOR_DATA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_DATA
+    <set >
+      <if test="@Ognl@isNotEmpty(record.id)" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.deviceCode)" >
+        DEVICE_CODE = #{record.deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.dataTime)" >
+        DATA_TIME = #{record.dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.data)" >
+        DATA = #{record.data,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.sensorCode)" >
+        SENSOR_CODE = #{record.sensorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(record.sendType)" >
+        SEND_TYPE = #{record.sendType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_DATA
+    set ID = #{record.id,jdbcType=VARCHAR},
+      DEVICE_CODE = #{record.deviceCode,jdbcType=VARCHAR},
+      DATA_TIME = #{record.dataTime,jdbcType=TIMESTAMP},
+      DATA = #{record.data,jdbcType=VARCHAR},
+      SENSOR_CODE = #{record.sensorCode,jdbcType=VARCHAR},
+      SEND_TYPE = #{record.sendType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lec.module.device.vo.DeviceSensorData" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_DATA
+    <set >
+      <if test="@Ognl@isNotEmpty(deviceCode)" >
+        DEVICE_CODE = #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(dataTime)" >
+        DATA_TIME = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="@Ognl@isNotEmpty(data)" >
+        DATA = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorCode)" >
+        SENSOR_CODE = #{sensorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="@Ognl@isNotEmpty(sendType)" >
+        SEND_TYPE = #{sendType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lec.module.device.vo.DeviceSensorData" >
+    <!--
+      WARNING - @mbggenerated
+      This element was generated on Sat Sep 29 10:28:43 CST 2018.
+    -->
+    update T_DEVICE_SENSOR_DATA
+    set DEVICE_CODE = #{deviceCode,jdbcType=VARCHAR},
+      DATA_TIME = #{dataTime,jdbcType=TIMESTAMP},
+      DATA = #{data,jdbcType=VARCHAR},
+      SENSOR_CODE = #{sensorCode,jdbcType=VARCHAR},
+      SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getListByCondition" resultMap="BaseResultMap" >
+    select 
+    ID, DEVICE_CODE, DATA_TIME, getRealData(DEVICE_CODE, SENSOR_CODE, DATA) AS DATA, SENSOR_CODE, SEND_TYPE
+     from T_DEVICE_SENSOR_DATA
+    <include refid="BaseWhere"/>
+    <if test="@Ognl@isNotEmpty(sortColumn)" >
+       order by ${sortColumn} 
+    </if>
+  </select>
+  <sql id="BaseWhere">
+  	<where >
+      <if test="@Ognl@isNotEmpty(id)" >
+         and ID = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(deviceCode)" >
+         and DEVICE_CODE = #{deviceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(beginTime)" >
+         and DATA_TIME <![CDATA[>=]]> TO_DATE('${beginTime}', 'YYYY-MM-DD HH24:MI:SS')
+      </if>
+      <if test="@Ognl@isNotEmpty(endTime)" >
+         and DATA_TIME <![CDATA[<=]]> TO_DATE('${endTime}', 'YYYY-MM-DD HH24:MI:SS')
+      </if>
+      <if test="@Ognl@isNotEmpty(data)" >
+         and DATA = #{data,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(sensorCode)" >
+         and SENSOR_CODE = #{sensorCode,jdbcType=VARCHAR}
+      </if>
+      <if test="@Ognl@isNotEmpty(sendType)" >
+         and SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="countList" resultType="java.lang.Integer" >
+    select count(id) from T_DEVICE_SENSOR_DATA
+    <include refid="BaseWhere"/>
+  </select>
+</mapper>
